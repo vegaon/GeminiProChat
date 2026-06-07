@@ -17,6 +17,7 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null)
   const [isStick, setStick] = createSignal(false)
   const [showComingSoon, setShowComingSoon] = createSignal(false)
+  const [useClaudeModel, setUseClaudeModel] = createSignal(false)
   const maxHistoryMessages = parseInt(import.meta.env.PUBLIC_MAX_HISTORY_MESSAGES || '99')
 
   createEffect(() => (isStick() && smoothToBottom()))
@@ -101,7 +102,8 @@ export default () => {
         parts: [{ text: message.content }],
       })).slice(-maxHistoryMessages)
       const timestamp = Date.now()
-      const response = await fetch('/api/generate', {
+      const endpoint = useClaudeModel() ? '/api/claude-generate' : '/api/generate'
+      const response = await fetch(endpoint, {
         method: 'POST',
         body: JSON.stringify({
           messages: convertReqMsgList(requestMessageList),
@@ -254,6 +256,21 @@ export default () => {
           </div>
         )}
       >
+        <div class="fi gap-1 mb-2 op-60 text-sm">
+          <span>Model:</span>
+          <button
+            class={`px-2 py-0.5 rd transition-colors ${!useClaudeModel() ? 'bg-slate/20 dark:bg-slate/30 op-100!' : 'hover:bg-slate/10'}`}
+            onClick={() => setUseClaudeModel(false)}
+          >
+            Gemini
+          </button>
+          <button
+            class={`px-2 py-0.5 rd transition-colors ${useClaudeModel() ? 'bg-slate/20 dark:bg-slate/30 op-100!' : 'hover:bg-slate/10'}`}
+            onClick={() => setUseClaudeModel(true)}
+          >
+            Claude
+          </button>
+        </div>
         <div class="gen-text-wrapper relative">
           <button title="Picture" onClick={handlePictureUpload} class="absolute left-1rem top-50% translate-y-[-50%]">
             <Picture />
