@@ -1,0 +1,4 @@
+# Ignore all frontend files — only push gas_code.js and appsscript.json to GAS
+**
+!gas_code.js
+!appsscript.json

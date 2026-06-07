@@ -11,7 +11,12 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix"
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix",
+    "clasp:login": "clasp login",
+    "clasp:create": "clasp create --title \"專案資料庫\" --type standalone",
+    "clasp:push": "clasp push -f",
+    "clasp:deploy": "clasp deploy --description \"Production Web App\"",
+    "clasp:deployments": "clasp deployments"
   },
   "dependencies": {
     "@astrojs/netlify": "2.3.0",
@@ -36,6 +41,7 @@
   },
   "devDependencies": {
     "@evan-yang/eslint-config": "^1.0.9",
+    "@google/clasp": "^3.3.0",
     "@iconify-json/carbon": "^1.1.18",
     "@types/markdown-it": "^12.2.3",
     "@typescript-eslint/parser": "^5.60.0",
