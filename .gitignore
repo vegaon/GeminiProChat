@@ -29,3 +29,6 @@ pnpm-debug.log*
 
 # Editor directories and files
 .idea
+
+# MCP server config (contains tokens)
+.claude/mcp.json
